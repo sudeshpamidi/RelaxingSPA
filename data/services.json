@@ -5,7 +5,9 @@
         "Price": "250.00",
         "Minutes": "110",
         "CategoryName": "Skin Care",
-        "Reviews": []
+        "Reviews": [{ "Description": "I started coming into ME Spa a few months ago after bouncing around from place to place getting ok at best and then some awesome experiences. When I came in I figured I would try it out and see. I was immediately won over and treated amazing. Amber listened and worked through a variety of bumps/bruises and past sports injuries with ease.", "PostedBy": "Sudesh", "Date": "09/07/19" },
+            { "Description": "I started coming into ME Spa a few months ago after bouncing around from place to place getting ok at best and then some awesome experiences. When I came in I figured I would try it out and see. I was immediately won over and treated amazing. Amber listened and worked through a variety of bumps/bruises and past sports injuries with ease.", "PostedBy": "Anonymous", "Date": "09/07/19" }
+        ]
     },
     {
         "ServiceID": "SKIN2",
