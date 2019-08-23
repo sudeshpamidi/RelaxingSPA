@@ -10,26 +10,23 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="css/stylesheet.css" rel="stylesheet">
 
-    <title>Hello, world!</title>
+    <title>SPA.cial</title>
 </head>
 
-<body>
+<body class="home">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <a class="navbar-brand" href="#">SPA.cial</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+            <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Home
               <span class="sr-only">(current)</span>
             </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Services</a>
@@ -44,40 +41,27 @@
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
-
             <div class="col-lg-3 my-4">
-
                 <form>
                     <div class="drop-down">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Select a Category
-                                      </button>
+                            Select a Category
+                        </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="categoryList">
                         </div>
                         <h3 id="categoryName">&nbsp;</h3>
                         <ul class="text-left" id="servicesList"></ul>
                     </div>
                 </form>
-
-                <!-- <h1 class="my-4">Shop Name</h1>
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">Category 1</a>
-                    <a href="#" class="list-group-item">Category 2</a>
-                    <a href="#" class="list-group-item">Category 3</a>
-                </div> -->
-
-
             </div>
             <!-- /.col-lg-3 -->
 
-            <div class="col-lg-9">
-
+            <div class="col-lg-9" id="serviceReviews">
                 <div class="card mt-4">
                     <img class="card-img-top img-fluid" src="images/essentialoils.jpg" alt="">
                     <div class="card-body">
-                        <h3 class="card-title">Product Name</h3>
+                        <h3 class="card-title">Service Name</h3>
                         <h4>$24.99</h4>
                         <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
                         <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span> 4.0 stars
@@ -90,34 +74,6 @@
                         Service Reviews
                     </div>
                     <div class="card-body" id="card-review">
-                        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint
-                            natus.
-                        </p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint
-                            natus.
-                        </p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint
-                            natus.
-                        </p>
-                        <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                        <hr> -->
-                        <!-- <a href="#" class="btn btn-success" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Leave a Review</a> 
-
-                            
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <textarea rows="4" cols="100">At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.</textarea>
-                            </div>
-                        </div> -->
-
-                        <!-- <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Leave a Review
-                        </button> -->
-
                     </div>
                 </div>
                 <!-- /.card -->
