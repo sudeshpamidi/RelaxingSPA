@@ -8,31 +8,25 @@ let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 /* HELPER METHODS FOR TRACING DURING DEBUGGING */
 
-function logOneService(service)
-{
-    console.log(" Service ID: " + service.ServiceID + 
-                " Service Name:" + service.ServiceName + 
-                " Price: " + service.Price);
+function logOneService(service) {
+    console.log(" Service ID: " + service.ServiceID +
+        " Service Name:" + service.ServiceName +
+        " Price: " + service.Price);
 }
 
-function logArrayOfServices(arr)
-{
-    for(let i=0; i < arr.length; i++)
-    {
+function logArrayOfServices(arr) {
+    for (let i = 0; i < arr.length; i++) {
         logOneService(arr[i])
     }
 }
 
 /* HELPER METHODS FOR SEARCHING CATEGORIES AND SERVICES */
 
-function getMatchingServiceById(id, data)
-{
+function getMatchingServiceById(id, data) {
     console.log("looking for that service...");
     let match = null;
-    for(let i = 0; i < data.length; i++)
-    {
-        if (data[i].ServiceID == id)
-        {
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].ServiceID == id) {
             match = data[i];
             break;
         }
@@ -40,13 +34,10 @@ function getMatchingServiceById(id, data)
     return match;
 }
 
-function getServiceCategoryTextByValue(value, data)
-{
+function getServiceCategoryTextByValue(value, data) {
     let match = null;
-    for(let i = 0; i < data.length; i++)
-    {
-        if (data[i].Value == value)
-        {
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].Value == value) {
             match = data[i];
             break;
         }
@@ -54,14 +45,11 @@ function getServiceCategoryTextByValue(value, data)
     return match;
 }
 
-function getMatchingServicesByCategory(catID, data)
-{
+function getMatchingServicesByCategory(catID, data) {
     //console.log("looking for services in category...");
     let matches = [];
-    for(let i = 0; i < data.length; i++)
-    {
-         if (data[i].CategoryName.toUpperCase() == catID.toUpperCase())
-        {
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].CategoryName.toUpperCase() == catID.toUpperCase()) {
             matches[matches.length] = data[i];
         }
     }
@@ -72,35 +60,35 @@ function getMatchingServicesByCategory(catID, data)
 
 /* THIS CODE ALLOWS REQUESTS FOR THE SPA PAGE */
 
-app.get('/', function (req, res) {
-   res.sendFile( __dirname + "/public/" + "index.html" );
+app.get('/', function(req, res) {
+    res.sendFile(__dirname + "/public/" + "index.html");
 })
 
-app.get('/index.html', function (req, res) {
-    res.sendFile( __dirname + "/public/" + "index.html" );
- })
+app.get('/index.html', function(req, res) {
+    res.sendFile(__dirname + "/public/" + "index.html");
+})
 
- /* THIS CODE ALLOWS REQUESTS FOR THE API THROUGH */
+/* THIS CODE ALLOWS REQUESTS FOR THE API THROUGH */
 
- // GET CATEGORIES
- app.get('/api/categories', function (req, res) {
+// GET CATEGORIES
+app.get('/api/categories', function(req, res) {
     console.log("Got a GET request for categories");
-	
-    let data = fs.readFileSync( __dirname + "/data/" + "categories.json", 'utf8');
+
+    let data = fs.readFileSync(__dirname + "/data/" + "categories.json", 'utf8');
     data = JSON.parse(data);
-    
+
     //calls to JSON.parse and JSON.stringify not needed if debugging removed
     //console.log("Returned data is: ");
     //for(let i=0; i < data.length; i++)
     //    console.log(data.Category + " - " + data.Value);
-    res.end( JSON.stringify(data) );
+    res.end(JSON.stringify(data));
 });
 
 // GET ALL SERVICES
-app.get('/api/services', function (req, res) {
+app.get('/api/services', function(req, res) {
     console.log("Got a GET request for ALL services");
-	
-    let data = fs.readFileSync( __dirname + "/data/services.json", 'utf8');
+
+    let data = fs.readFileSync(__dirname + "/data/services.json", 'utf8');
     //console.log("DATA--> " + data);
 
     // strips off bad characters which seem to be in services.json file...
@@ -111,19 +99,19 @@ app.get('/api/services', function (req, res) {
     ///console.log("DATA--> " + data);
 
     data = JSON.parse(data);
-	
+
     //calls to JSON.parse and JSON.stringify not needed if debugging removed
     //console.log("Returned data is: ");
     //logArrayOfServices(data);
-    res.end( JSON.stringify(data) );
+    res.end(JSON.stringify(data));
 });
 
 // GET ONE SERVICE BY ID
-app.get('/api/services/:id', function (req, res) {
+app.get('/api/services/:id', function(req, res) {
     let id = req.params.id;
     console.log("Got a GET request for service " + id);
 
-    let data = fs.readFileSync( __dirname + "/data/services.json", 'utf8');
+    let data = fs.readFileSync(__dirname + "/data/services.json", 'utf8');
     //console.log("DATA--> " + data);
 
     // strips off bad characters which seem to be in services.json file...
@@ -137,29 +125,28 @@ app.get('/api/services/:id', function (req, res) {
 
     // find course by id
     let match = getMatchingServiceById(id, data)
-    if (match == null)
-	{
-		res.status(404).send('Not Found');
-		return;
-	}
+    if (match == null) {
+        res.status(404).send('Not Found');
+        return;
+    }
 
     //console.log("Returned data is: ");
     //logOneService(match);
-    res.end( JSON.stringify(match) );
+    res.end(JSON.stringify(match));
 })
 
 // GET MANY SERVICES BY CATEGORY
-app.get('/api/services/bycategory/:id', function (req, res) {
+app.get('/api/services/bycategory/:id', function(req, res) {
     let id = req.params.id;
-    console.log("Got a GET request for services in category " + id);                      
+    console.log("Got a GET request for services in category " + id);
 
-    let categories = fs.readFileSync( __dirname + "/data/categories.json", 'utf8');
+    let categories = fs.readFileSync(__dirname + "/data/categories.json", 'utf8');
     categories = JSON.parse(categories);
 
     let selectedCategory = getServiceCategoryTextByValue(id, categories).Category
-    console.log( "Value was : " + id + " which matched category " + selectedCategory);
+    console.log("Value was : " + id + " which matched category " + selectedCategory);
 
-    let data = fs.readFileSync( __dirname + "/data/services.json", 'utf8');
+    let data = fs.readFileSync(__dirname + "/data/services.json", 'utf8');
     //console.log("DATA--> " + data);
 
     // strips off bad characters which seem to be in services.json
@@ -174,15 +161,49 @@ app.get('/api/services/bycategory/:id', function (req, res) {
 
     //console.log("Returned data is: ");
     //logArrayOfServices(matches);
-    res.end( JSON.stringify(matches) );
+    res.end(JSON.stringify(matches));
 })
- 
+
+//ADD A REVIEW
+app.post('/api/review', urlencodedParser, function(req, res) {
+    console.log("Got a POST request to review");
+    console.log("BODY -------->" + JSON.stringify(req.body));
+
+    let selectedServiceID = req.body.serviceid;
+    let review = {
+        Description: req.body.description,
+        PostedBy: req.body.postedby,
+        Date: new Date()
+    };
+
+    let data = fs.readFileSync(__dirname + "/data/" + "services.json", 'utf8');
+    data = JSON.parse(data);
+
+    // Find the service
+    let match = getMatchingServiceById(selectedServiceID, data)
+    console.log("match is " + match)
+
+    if (match == null) {
+        res.status(404).send('Not Found');
+        return;
+    }
+    match.Reviews[match.Reviews.length] = review;
+    fs.writeFileSync(__dirname + "/data/" + "services.json", JSON.stringify(data));
+
+    console.log(review);
+    console.log('Service s saved with new student added!');
+
+
+    res.status(200).send();
+})
+
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-let server = app.listen(8081, function () {
-   //let host = server.address().address
-   let port = server.address().port
-   
-   console.log("App listening at port %s", port)
+let server = app.listen(8081, function() {
+    //let host = server.address().address
+    let port = server.address().port
+
+    console.log("App listening at port %s", port)
 })

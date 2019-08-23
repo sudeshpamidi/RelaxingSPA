@@ -48,20 +48,33 @@ $(document).ready(function() {
         });
     }
 
+    /**
+     * 
+     * @param {*} serviceId 
+     */
     function getService(serviceId) {
 
         $.getJSON(`api/services/${serviceId}`, (service) => {
+            console.log(service);
+
             $(".card .card-img-top").attr("src", "images/doubleliftpurebliss.jpg");
             $(".card .card-title").html(service.ServiceName);
             $(".card h4").html("$" + Number(service.Price).toFixed(2));
             $(".card .card-text").html(service.Description);
 
-            // $("#cardTitle").html("Product ID:" + service.ServiceID);
-            // $("#cardText1").html("Product Name:" + service.ServiceName);
-            // $("#cardText2").html("Unit Price:" + Number(service.Price).toFixed(2));
+            $.each(service.Reviews, (index, review) => {
+                console.log(review);
+                $("#card-review .card-body").prepend($("<hr>"));
+                $("#card-review .card-body").prepend($("<small />")
+                    .html('Posted by ' + review.PostedBy + ' ' + review.Date)
+                    .attr("class", "text-muted")
+                );
+                $("#card-review .card-body").prepend($("<p />").html(review.Description));
+
+            });
 
             // $("#productCard").show();
         })
+    };
 
-    }
 });
