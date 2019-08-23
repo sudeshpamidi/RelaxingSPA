@@ -193,7 +193,6 @@ app.post('/api/review', urlencodedParser, function(req, res) {
     console.log(review);
     console.log('Service s saved with new student added!');
 
-
     res.status(200).send();
 })
 
