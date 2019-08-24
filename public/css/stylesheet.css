@@ -4,8 +4,8 @@ body {
 
 .home {
     display: flex;
-    /*background-image: url("../images/essentialoils.jpg");
-    background-image: url("../images/spa-outline1.jpg");*/
+    /*background-image: url("../images/essentialoils.jpg");*/
+    background-image: url("../images/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
