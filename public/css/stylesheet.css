@@ -1,13 +1,13 @@
 body {
     padding-top: 56px;
-}
-
-.home {
     display: flex;
     background-image: url("../images/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+
+/* nutrlizing all styles for ul tags */
 
 .ul {
     list-style-type: none;
@@ -15,13 +15,22 @@ body {
     margin: 0;
 }
 
+
+/* used to hide sections*/
+
 .hidden {
     display: none;
 }
 
+
+/*this is applied to aside tabs displaying (features)*/
+
 aside {
     border: solid 3px #ccc;
 }
+
+
+/* image card size */
 
 .image-card {
     width: 900px;

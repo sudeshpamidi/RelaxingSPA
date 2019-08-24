@@ -43,10 +43,10 @@ $(document).ready(function() {
                 //show first service details as default 
                 getService(services[0].ServiceID);
                 $.each(services, (index, service) => {
-                    $("#servicesList").append($("<a />")
+                    $("#servicesList").append($("<li />")
                         .text(service.ServiceName)
                         .attr("class", "dropdown-item")
-                        .attr("href", "#")
+                        //.attr("href", "#")
                         .on("click", (e) => {
                             e.preventDefault();
                             getService(service.ServiceID);
@@ -69,8 +69,11 @@ $(document).ready(function() {
         });
     };
 
+    /**
+     * This custom function to populate the service information on the screen
+     * @param {*} service 
+     */
     function populateService(service) {
-
         $(".card .card-img-top").attr("src", "images/" + service.Image);
         $(".card .card-title").html(service.ServiceName);
         $(".card h4").html(service.Minutes + " Minutes");
@@ -95,16 +98,19 @@ $(document).ready(function() {
             .html("Leave a Review")
         );
 
+        //appending div
         $("#cardReview").append($("<div />")
             .attr("class", "collapse")
             .attr("id", "collapseReview")
             .attr("data-parent", "#serviceContainer")
         );
 
+        //appending div
         $("#cardReview #collapseReview").append($("<div />")
             .attr("class", "card-body")
         );
 
+        //appending the text area
         $("#collapseReview .card-body").append($("<textarea />")
             .attr("rows", "4")
             .attr("cols", "100")
@@ -112,6 +118,7 @@ $(document).ready(function() {
             .attr("maxlength", "100")
         );
 
+        //appending submit button
         $("#collapseReview .card-body").append($("<button />")
             .attr("class", "btn btn-success")
             .attr("type", "button")
