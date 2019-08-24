@@ -17,7 +17,7 @@ $(document).ready(function() {
                     .attr("href", "#")
                     .on("click", (e) => {
                         e.preventDefault();
-                        $("body").removeClass("home");
+                        //$("body").removeClass("home");
                         $("#categoryName").text(category.Category);
                         getServices(category.Value);
                     })
@@ -39,7 +39,7 @@ $(document).ready(function() {
             getService(services[0].ServiceID);
 
             $.each(services, (index, service) => {
-                $("#servicesList").append($("<li />")
+                $("#servicesList").append($("<a />")
                     .text(service.ServiceName)
                     .attr("class", "dropdown-item")
                     .attr("href", "#")
@@ -60,16 +60,11 @@ $(document).ready(function() {
     function getService(serviceId) {
         $.getJSON(`api/services/${serviceId}`, (service) => {
             $(".card .card-img-top").attr("src", "images/" + service.Image);
-
-            console.log("service.Image :" + service.Image);
-
             $(".card .card-title").html(service.ServiceName);
             $(".card h4").html(service.Minutes + " Minutes");
             $("#price").html("$" + Number(service.Price).toFixed(2));
             $(".card .card-text").html(service.Description);
-
             $("#cardReview").empty();
-
             $.each(service.Reviews, (index, review) => {
                 $("#cardReview").prepend($("<hr>"));
                 $("#cardReview ").prepend($("<small />")
