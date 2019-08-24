@@ -4,13 +4,35 @@ body {
 
 .home {
     display: flex;
-    background-image: url("../images/essentialoils.jpg");
+    /*background-image: url("../images/essentialoils.jpg");
+    background-image: url("../images/spa-outline1.jpg");*/
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-ul {
+.ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+aside {
+    /*position: absolute; */
+    border: solid 3px #ccc;
+    /*margin: 20px;
+    padding: 20px;*/
+    /*max-width: 425px;
+    background-color: #fff;*/
+    /*right: -50%;*/
+    /*width: 300px;*/
+    /*top: -20px;*/
+}
+
+.image-card {
+    width: 900px;
+    height: 400px;
 }
