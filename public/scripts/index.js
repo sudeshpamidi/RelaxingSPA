@@ -1,7 +1,12 @@
+/**
+ * Scripts to get SPA categories, services and display them to page.
+ * Author: Sudesh Pamidi
+ * Date: 08/24/2019
+ */
 "use strict"
 $(document).ready(function() {
 
-    //populate the dropdown button
+    /*populate the dropdown button*/
     getCategories();
 
     /**
@@ -20,8 +25,7 @@ $(document).ready(function() {
                         //$("body").removeClass("home");
                         $("#categoryName").text(category.Category);
                         getServices(category.Value);
-                    })
-                )
+                    }));
             });
         });
     }
@@ -33,23 +37,25 @@ $(document).ready(function() {
     function getServices(category) {
         $.getJSON(`api/services/bycategory/${category}`, (services) => {
 
-            $("#servicesList").html('');
+                //clear the list before populate
+                $("#servicesList").html('');
 
-            //show first service details as default 
-            getService(services[0].ServiceID);
-
-            $.each(services, (index, service) => {
-                $("#servicesList").append($("<a />")
-                    .text(service.ServiceName)
-                    .attr("class", "dropdown-item")
-                    .attr("href", "#")
-                    .on("click", (e) => {
-                        e.preventDefault();
-                        getService(service.ServiceID);
-                    })
-                )
+                //show first service details as default 
+                getService(services[0].ServiceID);
+                $.each(services, (index, service) => {
+                    $("#servicesList").append($("<a />")
+                        .text(service.ServiceName)
+                        .attr("class", "dropdown-item")
+                        .attr("href", "#")
+                        .on("click", (e) => {
+                            e.preventDefault();
+                            getService(service.ServiceID);
+                        }));
+                });
+            })
+            .done(function() {
+                //do nothing -just a placeholder
             });
-        });
     }
 
     /**
@@ -59,70 +65,69 @@ $(document).ready(function() {
      */
     function getService(serviceId) {
         $.getJSON(`api/services/${serviceId}`, (service) => {
-            $(".card .card-img-top").attr("src", "images/" + service.Image);
-            $(".card .card-title").html(service.ServiceName);
-            $(".card h4").html(service.Minutes + " Minutes");
-            $("#price").html("$" + Number(service.Price).toFixed(2));
-            $(".card .card-text").html(service.Description);
-            $("#cardReview").empty();
-            $.each(service.Reviews, (index, review) => {
-                $("#cardReview").prepend($("<hr>"));
-                $("#cardReview ").prepend($("<small />")
-                    .html('Posted by ' + review.PostedBy + ' ' + review.Date)
-                    .attr("class", "text-muted")
-                );
-                $("#cardReview").prepend($("<p />").html(review.Description));
-            });
-
-            // let textArea = `                                      
-            //     <div id="collapseReview" class="collapse" data-parent="#serviceContainer">
-            //         <div class="card-body">
-            //             <textarea rows="4" cols="100" id="reviewArea"></textarea>
-            //         </div>
-            //     </div>`;
-
-            $("#cardReview").append($("<button />")
-                .attr("class", "btn btn-link collapsed")
-                .attr("type", "button")
-                .attr("data-toggle", "collapse")
-                .attr("data-target", "#collapseReview")
-                .html("Leave a Review")
-            );
-
-            $("#cardReview").append($("<div />")
-                .attr("class", "collapse")
-                .attr("id", "collapseReview")
-                .attr("data-parent", "#serviceContainer")
-            );
-
-            $("#cardReview #collapseReview").append($("<div />")
-                .attr("class", "card-body")
-            );
-
-            $("#collapseReview .card-body").append($("<textarea />")
-                .attr("rows", "4")
-                .attr("cols", "100")
-                .attr("id", "reviewArea")
-            );
-            //$("#cardReview").append(textArea);
-
-            $("#collapseReview .card-body").append($("<button />")
-                .attr("class", "btn btn-success")
-                .attr("type", "button")
-                .html("Submit")
-                .on("click", (e) => {
-                    e.preventDefault();
-                    addReview(service.ServiceID);
-                })
-            );
-
-            $("#homeContainer").hide();
-            $("#serviceContainer").show();
+            populateService(service)
         });
     };
 
+    function populateService(service) {
+
+        $(".card .card-img-top").attr("src", "images/" + service.Image);
+        $(".card .card-title").html(service.ServiceName);
+        $(".card h4").html(service.Minutes + " Minutes");
+        $("#price").html("$" + Number(service.Price).toFixed(2));
+        $(".card .card-text").html(service.Description);
+        $("#cardReview").empty();
+        $.each(service.Reviews, (index, review) => {
+            $("#cardReview").prepend($("<hr>"));
+            $("#cardReview ").prepend($("<small />")
+                .html('Posted by ' + review.PostedBy + ' ' + review.Date)
+                .attr("class", "text-muted")
+            );
+            $("#cardReview").prepend($("<p />").html(review.Description));
+        });
+
+        // append collapsed button to review card
+        $("#cardReview").append($("<button />")
+            .attr("class", "btn btn-link collapsed")
+            .attr("type", "button")
+            .attr("data-toggle", "collapse")
+            .attr("data-target", "#collapseReview")
+            .html("Leave a Review")
+        );
+
+        $("#cardReview").append($("<div />")
+            .attr("class", "collapse")
+            .attr("id", "collapseReview")
+            .attr("data-parent", "#serviceContainer")
+        );
+
+        $("#cardReview #collapseReview").append($("<div />")
+            .attr("class", "card-body")
+        );
+
+        $("#collapseReview .card-body").append($("<textarea />")
+            .attr("rows", "4")
+            .attr("cols", "100")
+            .attr("id", "reviewArea")
+            .attr("maxlength", "100")
+        );
+
+        $("#collapseReview .card-body").append($("<button />")
+            .attr("class", "btn btn-success")
+            .attr("type", "button")
+            .html("Submit")
+            .on("click", (e) => {
+                e.preventDefault();
+                addReview(service.ServiceID);
+            })
+        );
+
+        $("#homeContainer").hide(); //Hide home Container
+        $("#serviceContainer").show(); //Show Service Container
+    }
+
     /**
-     * adds a review to JSON.
+     * Adds a review to JSON file. For now it inserts the review as Anonymous.
      * @param {*} serviceid 
      */
     function addReview(serviceid) {
@@ -138,6 +143,7 @@ $(document).ready(function() {
                     data: postData
                 })
                 .done(function() {
+                    //reload the services/reviews to refresh the date.
                     getService(serviceid);
                 });
         };

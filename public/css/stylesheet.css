@@ -4,7 +4,6 @@ body {
 
 .home {
     display: flex;
-    /*background-image: url("../images/essentialoils.jpg");*/
     background-image: url("../images/background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -21,15 +20,7 @@ body {
 }
 
 aside {
-    /*position: absolute; */
     border: solid 3px #ccc;
-    /*margin: 20px;
-    padding: 20px;*/
-    /*max-width: 425px;
-    background-color: #fff;*/
-    /*right: -50%;*/
-    /*width: 300px;*/
-    /*top: -20px;*/
 }
 
 .image-card {
